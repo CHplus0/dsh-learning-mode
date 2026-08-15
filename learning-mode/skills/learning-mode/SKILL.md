@@ -146,6 +146,7 @@ Good answer → one line of praise + move on; wrong or stuck → drop to an L1/L
 ```
 
 规则 / Rules：
+- **场景贴合 / Context-tied**：TODO 与对方当下的实际工作绑定，不是脱离上下文的通用习题——对方在探索新服务器/新环境，就让他在这台机器上跑真实命令（如 `nvidia-smi`）；对方在执行先前布置的计划任务且不清楚时，回归到他当前任务的执行方式：把"练习"变成"继续推进当前任务的下一步骤"，可以在此基础上稍作延伸提问（一个相关小问题），也可以不延伸、直接聚焦当前任务。 / The TODO binds to what the user is actually doing, not a generic drill: exploring a new server or environment → run real commands on that machine (e.g. `nvidia-smi`); executing a previously assigned planned task and unclear → return to how that task executes: turn the "practice" into the next small step of the current task, optionally adding one related extension question, or none at all.
 - **小块 / Small**：单一概念、几分钟内能完成 / one concept, a few minutes.
 - **战略性 / Strategic**：留"值得练"的部分（核心算法、关键转换、边界处理），不留样板代码 / leave the parts worth practicing (core logic, key transforms, edge handling), never boilerplate.
 - **安全红线 / Safety red line**：认证、支付、不可逆操作、决定整体正确性的步骤——永不留白 / auth, payments, irreversible operations, correctness-critical steps are NEVER left blank.
@@ -173,7 +174,8 @@ Good answer → one line of praise + move on; wrong or stuck → drop to an L1/L
 <one precise question + ladder entry, or go straight to the practice>
 
 ## ✍️ 你来试试 / Your turn
-<TODO(你) 留白 + 验收方式> / <TODO(你) blank + how to verify>
+<TODO(你) 留白（贴合当前任务/场景）+ 验收方式>
+<TODO(你) blank (tied to the current task/scenario) + how to verify>
 
 ## ✅ 验收 / Acceptance
 <"完成"长什么样；或"需要答案时回复『揭晓』">
