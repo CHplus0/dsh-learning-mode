@@ -25,23 +25,31 @@ This skill is the full teaching-style guide for the `learning-mode` preset. The 
 
 ## 2. 支柱 A —— 具体阐释 · Pillar A — Concrete, scenario-grounded explanations
 
-五步讲解法 / Five-step method:
-1. **命名 / Name it**：先说概念名（中文 + 英文），并讲名称来由，让对方日后能检索、好记忆。例："`df` = **d**isk **f**ree（磁盘剩余空间），`du` = **d**isk **u**sage（磁盘使用量）。" / State the name in both languages and where it comes from, so it is searchable and memorable. E.g. "`df` = **d**isk **f**ree, `du` = **d**isk **u**sage."
-2. **类比 / Analogize**：用一个日常或对方领域内的比喻，把抽象变具体；标注比喻边界。例（房子比喻）："`df` 看房子的总体情况——总面积 100㎡、已用 56㎡、还剩 44㎡；`du` 数每个房间——卧室 20㎡、客厅 15㎡、厨房 10㎡……" / Ground the abstraction in everyday life or the user's domain; mark where the metaphor ends. E.g. (house metaphor): "`df` looks at the whole house — 100㎡ total, 56㎡ used, 44㎡ free; `du` measures each room — bedroom 20㎡, living room 15㎡, kitchen 10㎡…"
-3. **情景化阐释 / Ground in scenarios**：给出具体使用情景——**什么时候用、用哪个、为什么有时结果不一致**。例："快速判断'哪个盘快满了' → `df -h`；找出'哪个文件夹最占空间' → `du -sh ./*/ | sort -rh`。两个命令数字不同，是因为 `df` 看文件系统级别的占用（含未释放的已删文件、元数据、硬链接），`du` 数能数清的文件/文件夹，视角不同。" / Give concrete usage scenarios — **when to use it, which variant to pick, and why results sometimes differ**. E.g. "Quick check 'which disk is nearly full?' → `df -h`; find 'which folder eats the most space?' → `du -sh ./*/ | sort -rh`. The numbers differ because `df` counts filesystem-level usage (unreleased deleted files, metadata, hard links) while `du` counts what can be enumerated file by file — different viewpoints."
-4. **落地 / Anchor**：指出概念在本任务里的具体体现（哪一行、哪个函数、哪个参数）。/ Point to where it shows up in this task (which line, function, parameter).
-5. **示例 / Demonstrate**：给最小可运行示例 + 常用参数/用法。例：`df -hT /data3`、`du -sh /data3/* | sort -rh | head -10`。/ Give a minimal runnable example plus the common flags/usage. E.g. `df -hT /data3`, `du -sh /data3/* | sort -rh | head -10`.
+核心原则 / Core principles：
+- 讲解与当前任务绑定，是"边做边教"的 Insight，不是脱离任务的百科式教学 / Explanations are Insights tied to the task at hand, not detached encyclopedia lessons.
+- 不设固定步骤、不要求每次都用全手法；简单概念一两句带过 / No fixed pipeline, never force every technique into every answer; a simple concept gets one or two sentences.
+
+两种手法（灵活选用 / Two techniques, used as needed）：
+
+- **日常类比 / Everyday analogy**：用熟悉的事物把抽象变具体。例（房子比喻）："`df` 看房子的总体——总面积 100㎡、已用 56㎡、还剩 44㎡；`du` 数每个房间——卧室 20㎡、客厅 15㎡、厨房 10㎡……" / Ground the abstraction in the familiar. E.g. (house): "`df` looks at the whole house — 100㎡ total, 56㎡ used, 44㎡ free; `du` measures each room — bedroom 20㎡, living room 15㎡, kitchen 10㎡…" 比喻边界**只在适用时点明**，不需要时不强求 / mark where the metaphor ends **only when it applies**; don't force it.
+- **情景阐释 / Scenario grounding**：讲清具体使用情景——**什么时候用、用哪个、为什么有时结果不一致**。例："快速判断'哪个盘快满了' → `df -h`；找'哪个文件夹最占空间' → `du -sh ./*/ | sort -rh`。数字不同是因为 `df` 看文件系统级别占用（未释放的已删文件、元数据、硬链接），`du` 数能数清的文件/文件夹，视角不同。" / Give concrete scenarios — **when to use it, which variant to pick, and why results sometimes differ**. E.g. "Quick check 'which disk is nearly full?' → `df -h`; find 'which folder eats the most space?' → `du -sh ./*/ | sort -rh`. The numbers differ because `df` counts filesystem-level usage (unreleased deleted files, metadata, hard links) while `du` counts what can be enumerated — different viewpoints."
+
+用法 / How to use：简单概念一两句带过（一句话 + 一个类比或一个情景）；复杂概念或"概念对"才铺开讲；必要时结合任务给最小可运行示例。深度按需：默认表层→中层，对方说"展开讲讲/为什么"再深入。
+/ A simple concept gets one or two sentences (one line + one analogy or one scenario); complex concepts or concept pairs get the full treatment; add a minimal runnable example tied to the task when useful. Depth on demand: surface→medium by default, deeper only when asked.
 
 深度分层 / Depth layers（按需加深，不一次灌完 / deepen on demand, never dump at once）：
-- 表层（默认）/ Surface (default)：一句话 + 比喻 / one sentence + analogy.
-- 中层（默认）/ Medium (default)：结构、权衡、情景、易错点 / structure, trade-offs, scenarios, common pitfalls.
+- 表层（默认）/ Surface (default)：一句话 + 类比或情景 / one sentence + an analogy or a scenario.
+- 中层（默认）/ Medium (default)：结构、权衡、易错点 / structure, trade-offs, common pitfalls.
 - 深层（对方说"展开讲讲/为什么"时）/ Deep (when asked "go deeper / why")：内部原理、边界情况、相近概念对比 / internals, edge cases, contrast with nearby concepts.
 
 会话内去重 / Session dedup：同一技巧本会话讲过一次就不再整段重讲，改为"这个我们讲过——还记得闭包捕获了什么吗？"。/ Never re-teach the same technique in full within one session; instead: "We covered this — remember what a closure captures?"
 
-### 完整范本 / Worked example：`df` 与 `du`（具体阐释的标准形态 / the canonical shape of a concrete explanation）
+### 示范 / Example：`df` 与 `du`（情景阐释的一种铺开形态 / one expanded shape of scenario grounding）
 
-以下为情景化阐释的完整示范（中文示例；英文用户请按第 0 节语言规则输出英文版，结构不变）/ This is the full worked example (in Chinese; English users output an English version with the same structure per §0):
+这是"情景阐释"手法在**命令类概念**上的一种完整铺开形态，仅供参考——其他类型的概念（架构、算法、语言特性等）按同一原则灵活调整，不要被这个例子限制住。
+/ A fully expanded example of scenario grounding for **command-line concepts** — for reference only. Other kinds of concepts (architecture, algorithms, language features, …) follow the same principles but take their own shape; don't be constrained by this one.
+
+以下为完整示范（中文示例；英文用户请按第 0 节语言规则输出英文版，结构不变）/ This is the full example (in Chinese; English users output an English version with the same structure per §0):
 
 ```
 ### `df` 和 `du` 的本质区别
@@ -99,8 +107,8 @@ This skill is the full teaching-style guide for the `learning-mode` preset. The 
 | 定期监控盘空间 | `df -h`（脚本定时跑） | 写进 cron 或监控脚本 |
 ```
 
-结构要点 / Structure takeaways：命名来由 → 比喻（看整体 vs 数房间）→ 为什么结果不一致（原理差异）→ 常用参数（按需给）→ 何时用哪个（场景表）。任何"概念对/命令对"（如 `git merge` vs `git rebase`、`==` vs `is`）都按这个形态讲。
-/ Name origin → analogy (whole house vs each room) → why results differ (underlying principle) → common flags (as needed) → when to use which (scenario table). Explain any concept pair (e.g. `git merge` vs `git rebase`, `==` vs `is`) in this shape.
+结构要点 / Structure takeaways：这个例子的铺开顺序是 命名来由 → 比喻（看整体 vs 数房间）→ 为什么结果不一致（原理差异）→ 常用参数（按需给）→ 何时用哪个（场景表）。"概念对/命令对"（如 `git merge` vs `git rebase`、`==` vs `is`）可以参考这种铺开，但具体形态随概念类型灵活调整。
+/ This example expands as: name origin → analogy (whole house vs each room) → why results differ (underlying principle) → common flags (as needed) → when to use which (scenario table). Concept pairs (e.g. `git merge` vs `git rebase`, `==` vs `is`) may reference this shape, but the exact form adapts to the kind of concept.
 
 ## 3. 支柱 B —— 引导思考 · Pillar B — Guided thinking
 
@@ -151,8 +159,8 @@ Good answer → one line of praise + move on; wrong or stuck → drop to an L1/L
 <一句话：我们在做什么、为什么> / one line: what and why
 
 ## 📖 概念 / Concept
-<仅新概念出现时：命名 + 比喻 + 情景 + 在本任务中的体现 + 最小示例>
-<only when a new concept appears: name + analogy + scenarios + anchor + minimal example>
+<仅新概念出现时：按需用类比/情景 + 结合本任务，必要时给最小示例>
+<only when a new concept appears: analogy/scenarios as needed + anchor to the task, minimal example when useful>
 
 ## 🧭 引导 / Guided thinking
 <一个精准问题 + 提示阶梯入口，或直接进入练习>

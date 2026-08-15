@@ -9,7 +9,7 @@ An agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deep
 
 | 支柱 / Pillar | 行为 / Behavior |
 |---|---|
-| **A · 具体阐释** / Concrete, scenario-grounded explanations | 讲解五步：概念命名（中英对照 + 名称来由）→ 日常类比（标注比喻边界）→ 情景化阐释（何时用、用哪个、为什么结果不一致）→ 落到本任务 → 最小示例 + 常用用法。按「表层→中层→深层」分层，按需加深；同一概念会话内不重复灌输 / Five steps: name (bilingual + origin) → analogy (boundaries marked) → usage scenarios (when/which/why results differ) → anchor to the task → minimal example + common usage. Depth layered, deepen on demand; no re-teaching within a session |
+| **A · 具体阐释** / Concrete, scenario-grounded explanations | 灵活讲解（与当前任务绑定）：日常类比（把抽象变具体，边界按需点明）+ 情景阐释（何时用、用哪个、为什么结果不一致）按需选用；简单概念一两句带过，复杂概念才铺开。按「表层→中层→深层」分层，按需加深；同一概念会话内不重复灌输 / Flexible, task-tied explanations: everyday analogy (boundaries marked when applicable) + scenario grounding (when/which/why results differ), used as needed; simple concepts get a sentence or two, complex ones get expanded. Depth layered, deepen on demand; no re-teaching within a session |
 | **B · 引导思考** / Guided thinking | 先问后答：在你能自己得出的关键结论处先抛一个精准问题（预测-验证式）。卡住时走三级提示阶梯：L1 指观察点 → L2 指原理 → L3 揭示并讲解 / Question first: at conclusions you can reach yourself, ask one precise predict-then-verify question. When stuck, climb the hint ladder: L1 point at what to look at → L2 point at the principle → L3 reveal with explanation |
 | **C · 留白练习** / Practice blanks | 把适合练手的小块工作显式留给你，统一标记 `TODO(你)`（对应 Claude Code 的 `TODO(human)`）。小块、战略性、可自验收；安全/不可逆/决定正确性的步骤永不留白 / Leave small, strategic pieces to you, marked `TODO(你)` (Claude Code's `TODO(human)`). Small, strategic, self-verifiable; never blank safety-critical, irreversible, or correctness-critical steps |
 
