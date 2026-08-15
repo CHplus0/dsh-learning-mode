@@ -16,6 +16,11 @@ An agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deep
 配套**交互协议** / Interaction protocol：默认教学优先；你说「直接做 / 我来不及 / 尽快」即切直接模式完整执行；开场只问一次你的熟悉程度（入门/进阶/熟练）；尝试失败 ≥2 次自动降级为引导式揭示。语言跟随你：中文进中文出，英文进英文出。
 / Teaching-first by default; "just do it / no time / asap" switches to direct mode; asks your familiarity level (beginner/intermediate/advanced) once at the start; ≥2 failed attempts downgrades to a guided reveal. Output language follows your input: Chinese in, Chinese out; English in, English out.
 
+## 示例 / Examples
+
+[`df` vs `du` 完整示范](docs/examples/df-vs-du.md)——"情景阐释"手法的一次完整铺开（命令类概念）。这份文件是**面向人的文档，不参与任何 skill 加载**：学习模式的 skill 只教原则与形式（占位符模板），具体例子由模型在运行时根据你当下的任务现编，避免固定例子削弱泛化。想给 skill 留一个永久例子时，请放这里，**不要**放进 `learning-mode/skills/`。
+/ [Full `df` vs `du` worked example](docs/examples/df-vs-du.md) — one complete expansion of the scenario-grounding technique (command-line concepts). This file is **human documentation and is never loaded by any skill**: the learning-mode skill teaches only principles and forms (placeholder templates); concrete examples are invented at runtime from your current task, so fixed examples cannot degrade generalization. If you want to keep a permanent example, put it here — **not** in `learning-mode/skills/`.
+
 ## 安装 / Install
 
 Requires DSH `0.1.0-rc.x` (a deployment with `profiles/` under `~/.dsh`). 要求 DSH `0.1.0-rc.x`（在 `~/.dsh` 下有 `profiles/` 的部署）。
