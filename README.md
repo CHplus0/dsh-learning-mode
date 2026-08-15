@@ -20,7 +20,7 @@
 
 ```bash
 # 方式一：clone 后复制
-git clone https://github.com/<your-name>/dsh-learning-mode.git
+git clone https://github.com/CHplus0/dsh-learning-mode.git
 cp -r dsh-learning-mode/learning-mode ~/.dsh/.agent-presets/
 
 # 方式二：直接运行仓库内的安装脚本
