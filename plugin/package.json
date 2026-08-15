@@ -1,6 +1,6 @@
 {
   "name": "dsh-learning-mode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek Harness (DSH) bundle that self-installs the 学习模式 (Learning Mode) agent preset — a coding agent that teaches while coding: concrete scenario-grounded explanations, Socratic guidance, and TODO(你) practice blanks, modeled on Claude Code's Learning output style.",
   "license": "MIT",
   "type": "module",
