@@ -31,6 +31,9 @@ cp -r dsh-learning-mode/learning-mode ~/.dsh/.agent-presets/
 
 # 方式二：直接运行安装脚本
 bash dsh-learning-mode/install.sh
+
+# 方式三：安装 npm bundle（自动装入预设）
+dsh plugin --profile web add dsh-learning-mode
 ```
 
 然后在 DSH 的 Web 界面**新建会话**，预设选择器里选 **学习模式** 即可（无需重启）。

@@ -31,6 +31,9 @@ cp -r dsh-learning-mode/learning-mode ~/.dsh/.agent-presets/
 
 # Option 2: run the installer
 bash dsh-learning-mode/install.sh
+
+# Option 3: install the npm bundle (auto-installs the preset)
+dsh plugin --profile web add dsh-learning-mode
 ```
 
 Then open the DSH web UI, start a **new session** and pick **学习模式 (Learning Mode)** — no restart needed.
