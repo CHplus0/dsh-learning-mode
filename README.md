@@ -18,7 +18,7 @@ An agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deep
 
 ## Examples
 
-[Full `df` vs `du` worked example](docs/examples/df-vs-du.md) — one complete expansion of the scenario-grounding technique (command-line concepts). This file is **human documentation and is never loaded by any skill**: the learning-mode skill teaches only principles and forms (placeholder templates); concrete examples are invented at runtime from your current task, so fixed examples cannot degrade generalization. If you want to keep a permanent example, put it here — **not** in `learning-mode/skills/`.
+[Teaching DeepSeek Harness's principles — the verbatim output of a real learning-mode session](docs/examples/dsh-principles.md) — a full teaching turn showing how concrete explanations, guided thinking, a context-tied `TODO(你)`, and the one-time opening calibration work together. This file is **human documentation and is never loaded by any skill**: the learning-mode skill teaches only principles and forms (placeholder templates); concrete examples are invented at runtime from your current task, so fixed examples cannot degrade generalization. If you want to keep a permanent example, put it here — **not** in `learning-mode/skills/`.
 
 ## Install
 
