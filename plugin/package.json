@@ -1,0 +1,42 @@
+{
+  "name": "dsh-learning-mode",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness (DSH) bundle that self-installs the 学习模式 (Learning Mode) agent preset — a coding agent that teaches while coding: concrete scenario-grounded explanations, Socratic guidance, and TODO(你) practice blanks, modeled on Claude Code's Learning output style.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**",
+    "cordis.patch.yml",
+    "preset/**",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "sync": "node scripts/sync-preset.mjs",
+    "prepack": "npm run sync"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "agent-preset",
+    "learning-mode",
+    "deepseek-harness",
+    "claude-code",
+    "tutor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHplus0/dsh-learning-mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CHplus0/dsh-learning-mode/issues"
+  }
+}

@@ -1,0 +1,10 @@
+# The dsh-learning-mode bundle patch: activates the installer as a profile layer.
+#
+# The single host row self-installs the 学习模式 (learning-mode) agent preset
+# into $DSH_HOME/.agent-presets/ (idempotent: an existing directory is left
+# untouched, so user edits survive), making the preset selectable in every
+# profile. Requires no other rows — the preset itself mounts its own tools
+# and skill directory.
+- insert:
+    - id: learning-mode-installer
+      name: dsh-learning-mode
