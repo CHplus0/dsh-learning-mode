@@ -51,64 +51,70 @@ This skill is the full teaching-style guide for the `learning-mode` preset. The 
 
 以下为完整示范（中文示例；英文用户请按第 0 节语言规则输出英文版，结构不变）/ This is the full example (in Chinese; English users output an English version with the same structure per §0):
 
-```
-### `df` 和 `du` 的本质区别
+````
+`df` 和 `du` 是 Linux 里最容易混淆的一对命令，但其实**名字已经剧透了答案**。
 
-#### 命令名称来由
+## 命名来由
 
-- `df` = disk free（磁盘的自由空间）
-- `du` = disk usage（磁盘的使用量）
+- `df` = **d**isk **f**ree —— "盘还剩多少"
+- `du` = **d**isk **u**sage —— "盘用了多少"
 
-#### 核心区别（房子比喻）
+## 核心区别（房子比喻）
 
-`df` —— 看房子的总体情况
-  我这套房子总面积 100㎡，已用 56㎡，还剩 44㎡
-  → 显示：整个文件系统的总容量、已用、剩余百分比
-  → 适用场景：快速判断"哪个盘快满了？"
+把一块磁盘分区想象成一套房子：
 
-`du` —— 看每个房间占了多少空间
-  卧室 20㎡、客厅 15㎡、厨房 10㎡...
-  → 显示：各个目录/文件的具体大小，可以逐级递归
-  → 适用场景：找出"哪个文件夹最占空间？"
+- **`df` 站在门口看整体**：总面积 100㎡、已用 56㎡、还剩 44㎡。它回答的是——"这套房子还能不能再装东西？"
+- **`du` 挨个数房间**：卧室 20㎡、客厅 15㎡、厨房 10㎡……它回答的是——"哪个房间最占地方？"
 
-#### 为什么两个命令数字有时不一样？
+所以使用场景一目了然：
 
-`df -h /` 显示 226G，但 `du -sh /*` 加起来只有 180G，差的 46G 去哪了？
-
-答案：
-- 删除的文件还被进程占着（未真正释放）
-- 系统日志、临时文件、inode 元数据
-- 硬链接或特殊文件，计算方式不同
-
-→ `df` 看"文件系统级别的占用"，`du` 看"能数清楚的文件/文件夹"，视角不同，所以数字有时会不一致。
-
-#### 常用参数一览
-
-`df` 参数：
-  df                  # 显示所有挂载点（单位：块，难读）
-  df -h               # human readable，单位自动转为 K/M/G/T（推荐）
-  df -hT /data3       # 同时显示文件系统类型
-  df -h /data3        # 只看某个挂载点
-
-`du` 参数：
-  du /data3/          # 显示该目录及所有子目录的大小（输出很多行）
-  du -s /data3/       # -s: summarize，只显示总和（一行）
-  du -sh /data3/      # -h: human readable，最常用组合
-  du -sh ./*/ | sort -rh        # 按大小降序，找最占空间的子目录
-  du -sh ./*/ | sort -rh | head -5   # 只看最大的前 5 个
-
-#### 何时用哪个？
-
-| 场景 | 用命令 | 例子 |
+| 需求 | 用哪个 | 例子 |
 |---|---|---|
-| 快速看某盘还剩多少空间 | `df -h` | `df -h /data3` |
-| 看某个目录占了多少空间 | `du -sh` | `du -sh /data3/anliang-zjl/` |
-| 找出最占空间的子目录 | `du -sh ./*/ \| sort -rh` | `du -sh /data3/* \| sort -rh \| head -10` |
-| 定期监控盘空间 | `df -h`（脚本定时跑） | 写进 cron 或监控脚本 |
+| 哪个盘快满了？还剩多少空间？ | `df` | `df -h` |
+| 某个文件夹占了多大？ | `du` | `du -sh /data` |
+| 找出最占空间的子目录 | `du` | `du -sh /data/* \| sort -rh \| head` |
+
+## 为什么两个命令的数字有时对不上？
+
+`df -h /` 显示已用 226G，但你把 `du -sh /*` 的结果全部加起来只有 180G——差的 46G 去哪了？
+
+这不是 bug，而是**视角不同**：
+
+- `df` 按**文件系统**算：包括被你删除但**进程还占着**的文件（删了但没释放）、系统日志、元数据、以及 ext 文件系统默认预留的 5% 保留块；
+- `du` 按**文件/目录**数：只数它能"点得清"的条目。
+
+换个比喻：`df` 看的是整栋楼的**用水总量**（含管道损耗、消防水箱），`du` 数的是**各家水表读数**——两个数当然对不上，但各有各的用途。
+
+## 常用参数（记住这几个就够）
+
+```
+df -h                      # human-readable，单位自动变 G/M，最常用
+df -h /data                # 只看某个挂载点
+du -sh /data               # -s 只输出总和，-h 人性化单位，最常用组合
+du -sh /data/* | sort -rh  # 按大小倒序，快速揪出"空间杀手"
 ```
 
-结构要点 / Structure takeaways：这个例子的铺开顺序是 命名来由 → 比喻（看整体 vs 数房间）→ 为什么结果不一致（原理差异）→ 常用参数（按需给）→ 何时用哪个（场景表）。"概念对/命令对"（如 `git merge` vs `git rebase`、`==` vs `is`）可以参考这种铺开，但具体形态随概念类型灵活调整。
-/ This example expands as: name origin → analogy (whole house vs each room) → why results differ (underlying principle) → common flags (as needed) → when to use which (scenario table). Concept pairs (e.g. `git merge` vs `git rebase`, `==` vs `is`) may reference this shape, but the exact form adapts to the kind of concept.
+一句话记忆：**"盘"的问题问 `df`，"目录"的问题问 `du`。**
+
+---
+
+✍️ **你来试试（可选）**：
+
+```
+TODO(你): 在你自己的机器上跑
+  df -h /
+  du -sh /* 2>/dev/null | sort -rh | head
+对比 df 显示的"已用"和 du 加出来的总和差多少。
+验收：能说出至少一个"差出来"的空间去哪了（答案就在上面的原理里）。
+```
+
+（提示：`du -sh /*` 会扫全盘，可能有点慢；权限不足的目录用 `2>/dev/null` 忽略报错。）
+
+顺便问一句校准（不答也行，只问一次）：你平时用 Linux 命令行多吗——入门、进阶还是熟练？另外你偏好我以后**先给例子**还是**先讲概念**？我按你的口味调整。
+````
+
+结构要点 / Structure takeaways：这个例子的铺开顺序是 开场钩子（名字剧透答案）→ 命名来由 → 比喻（门口看整体 vs 挨个数房间，各自回答什么问题）→ 使用场景表 → 为什么对不上（视角不同 + 第二层比喻）→ 常用参数（精简到够用）→ 一句话记忆 → `TODO(你)` 练习 + 开场校准提问。注意它同时演示了支柱 C 的 `TODO(你)` 留白和第 7 节的开场校准。"概念对/命令对"可以参考这种铺开，但具体形态随概念类型灵活调整。
+/ This example expands as: opening hook (the name gives it away) → name origin → analogy (whole house at the door vs room by room, each answering a question) → scenario table → why numbers differ (different viewpoints + a second analogy) → common flags (kept minimal) → one-line memory hook → a `TODO(你)` practice blank + the opening calibration question. Note it also demonstrates Pillar C's `TODO(你)` blank and §7's opening calibration. Concept pairs may reference this shape, but the exact form adapts to the kind of concept.
 
 ## 3. 支柱 B —— 引导思考 · Pillar B — Guided thinking
 
