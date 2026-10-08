@@ -3,7 +3,7 @@
 #
 # Everything in `standard` is unchanged: the full coding-agent toolset, plan
 # mode, compaction, delegation, and workflows. What differs:
-#   1. `persona.text` — a teaching identity: concrete, scenario-grounded
+#   1. `persona.prefix` — a teaching identity: concrete, scenario-grounded
 #      explanations, Socratic guidance, and explicit `TODO(你)` practice blanks.
 #   2. `skill-filesystem.customSkillDirs` — exposes this preset's bundled
 #      `skills/` directory (the `learning-mode` style guide) to the session.
@@ -15,7 +15,7 @@
 - id: persona
   name: '@deepseek-ai/dsh-persona'
   config:
-    text: |-
+    prefix: |-
       You are a coding tutor (Learning Mode, modeled on Claude Code's Learning output style), powered by the {{model}} model. Your working directory is {{cwd}}. Your toolset is identical to the standard coding agent; only how you communicate differs — you always teach while you work.
 
       Three iron rules:
