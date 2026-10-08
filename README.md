@@ -22,7 +22,7 @@ An agent preset for [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deep
 
 ## Install
 
-Requires DSH `0.1.0-rc.x` (a deployment with `profiles/` under `~/.dsh`).
+Requires a DSH deployment using `@deepseek-ai/dsh-persona` `0.1.5-rc.1` or later (`prefix` schema). Older persona versions requiring `text` are not supported.
 
 ```bash
 # Option 1: clone and copy
@@ -38,9 +38,19 @@ dsh plugin --profile web add dsh-learning-mode
 
 Then open the DSH web UI, start a **new session** and pick **学习模式 (Learning Mode)** — no restart needed.
 
+### Upgrade an existing installation
+
+The npm installer skips existing preset directories to preserve user edits. Updating the bundle alone **does not repair** presets installed by `dsh-learning-mode@0.1.1` or earlier.
+
+1. Locate `${DSH_HOME:-$HOME/.dsh}/.agent-presets/learning-mode/agent.cordis.yml`. If you configured `presetId`, use that directory name instead.
+2. Back up the file. Under the `@deepseek-ai/dsh-persona` row's `config`, change only `text: |-` to `prefix: |-`, keeping the indentation and persona prose unchanged. Update the `persona.text` comment to `persona.prefix` too. If it already uses `prefix`, no change is needed.
+3. Restart the DSH host and select Learning Mode in a new session.
+
+Alternatively, run `bash dsh-learning-mode/install.sh` from an updated checkout. It backs up the entire existing directory before replacing it; local customizations must be restored from that backup. This script honors `DSH_HOME` but always targets the default `learning-mode` directory.
+
 ### Customization
 
-- Tone & identity: edit `learning-mode/agent.cordis.yml` → `persona.text`.
+- Tone & identity: edit `learning-mode/agent.cordis.yml` → `persona.prefix`.
 - Style details & phrasing templates: edit `learning-mode/skills/learning-mode/SKILL.md`.
 - Rename: edit only `name` in `learning-mode/preset.yml` (the directory name is the preset id, must match `[a-z0-9][a-z0-9-]*`; renaming requires renaming the directory too).
 

@@ -22,7 +22,7 @@
 
 ## 安装
 
-要求 DSH `0.1.0-rc.x`（在 `~/.dsh` 下有 `profiles/` 的部署）。
+要求 DSH 部署使用 `@deepseek-ai/dsh-persona` `0.1.5-rc.1` 或更新版本（`prefix` 配置结构）。本预设不兼容仍要求 `text` 的旧版 persona。
 
 ```bash
 # 方式一：clone 后复制
@@ -38,9 +38,19 @@ dsh plugin --profile web add dsh-learning-mode
 
 然后在 DSH 的 Web 界面**新建会话**，预设选择器里选 **学习模式** 即可（无需重启）。
 
+### 升级已有安装
+
+npm 安装器为保留用户修改，会跳过已存在的预设目录。因此，仅升级 bundle **不会修复**由 `dsh-learning-mode@0.1.1` 或更早版本安装的预设。
+
+1. 找到 `${DSH_HOME:-$HOME/.dsh}/.agent-presets/learning-mode/agent.cordis.yml`。如果自定义了 `presetId`，使用对应目录名。
+2. 先备份文件。将 `@deepseek-ai/dsh-persona` 行的 `config` 下的 `text: |-` 改为 `prefix: |-`，保留缩进和全部人格正文；注释中的 `persona.text` 也改为 `persona.prefix`。如果已经使用 `prefix`，无需修改。
+3. 重启 DSH host，在新会话中选择学习模式。
+
+也可以从更新后的仓库运行 `bash dsh-learning-mode/install.sh`：脚本会备份整个已有目录，然后替换它；本地定制需要从备份恢复。脚本遵循 `DSH_HOME`，但始终安装到默认的 `learning-mode` 目录。
+
 ### 自定义
 
-- 语气/身份：编辑 `learning-mode/agent.cordis.yml` → `persona.text`。
+- 语气/身份：编辑 `learning-mode/agent.cordis.yml` → `persona.prefix`。
 - 教学细则与措辞模板：编辑 `learning-mode/skills/learning-mode/SKILL.md`。
 - 改名：只改 `learning-mode/preset.yml` 的 `name`（目录名 `learning-mode` 即预设 id，需匹配 `[a-z0-9][a-z0-9-]*`，改名需同步目录名）。
 
